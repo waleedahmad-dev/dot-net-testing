@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHighlighter", "WordHighlighter.csproj", "{0FF11C94-40D6-AE10-F80A-073991D82265}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FF11C94-40D6-AE10-F80A-073991D82265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF11C94-40D6-AE10-F80A-073991D82265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF11C94-40D6-AE10-F80A-073991D82265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF11C94-40D6-AE10-F80A-073991D82265}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54E24C8D-C51F-457D-A0C2-FAAB34751C2F}
+	EndGlobalSection
+EndGlobal

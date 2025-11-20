@@ -1,0 +1,21 @@
+<Window x:Class="WordHighlighter.OverlayBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OverlayBox"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
+
+    <Border x:Name="overlayBorder"
+            Background="#4015C39A"
+            BorderBrush="#15C39A"
+            BorderThickness="0,0,0,3"
+            CornerRadius="2"
+            Cursor="Hand"
+            MouseLeftButtonDown="OverlayBorder_MouseLeftButtonDown">
+        <!-- Semi-transparent green background with bottom border -->
+    </Border>
+</Window>

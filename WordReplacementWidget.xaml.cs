@@ -11,18 +11,28 @@ namespace WordHighlighter
         private readonly WordInteropService _wordService;
 
         public string ReplacementWord { get; private set; } = string.Empty;
+        public event EventHandler<string>? WordReplaced;
 
         public WordReplacementWidget(string originalWord, WordInteropService wordService)
         {
             InitializeComponent();
-            
+
+            // Make window topmost to appear above Word
+            Topmost = true;
+
             _originalWord = originalWord;
             _wordService = wordService;
-            
+
             txtOriginalWord.Text = originalWord;
             txtReplacement.Text = originalWord;
             txtReplacement.Focus();
             txtReplacement.SelectAll();
+
+            // Close on click outside or deactivate
+            this.Deactivated += (s, e) =>
+            {
+                Close();
+            };
         }
 
         private void BtnReplace_Click(object sender, RoutedEventArgs e)
@@ -32,7 +42,6 @@ namespace WordHighlighter
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             Close();
         }
 
@@ -44,7 +53,6 @@ namespace WordHighlighter
             }
             else if (e.Key == Key.Escape)
             {
-                DialogResult = false;
                 Close();
             }
         }
@@ -89,7 +97,7 @@ namespace WordHighlighter
             {
                 _wordService.ReplaceSelectedWord(replacement);
                 ReplacementWord = replacement;
-                DialogResult = true;
+                WordReplaced?.Invoke(this, replacement);
                 Close();
             }
             catch (Exception ex)
