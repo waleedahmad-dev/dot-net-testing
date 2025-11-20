@@ -38,6 +38,9 @@ namespace WordHighlighter
         [DllImport("user32.dll")]
         private static extern bool GetCursorPos(out POINT lpPoint);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -222,6 +225,28 @@ namespace WordHighlighter
             }
         }
 
+        public bool IsWordWindowFocused()
+        {
+            try
+            {
+                if (_wordApp == null) return false;
+
+                // Get the handle of the active Word window
+                dynamic activeWindow = _wordApp.ActiveWindow;
+                int wordHwnd = activeWindow.Hwnd;
+
+                // Get the currently focused window
+                IntPtr foregroundWindow = GetForegroundWindow();
+
+                // Check if Word window is the focused window
+                return foregroundWindow.ToInt32() == wordHwnd;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void ClearAllOverlays()
         {
             _wordPositions.Clear();
@@ -304,21 +329,43 @@ namespace WordHighlighter
             try
             {
                 dynamic selection = _wordApp.Selection;
+                
+                // Get the currently selected text
+                string oldWord = selection.Text.ToString().Trim();
 
-                if (selection != null && !string.IsNullOrEmpty(selection.Text.ToString()))
-                {
-                    string oldWord = selection.Text.ToString().Trim();
+                // Replace the selected text with the new word
+                selection.Text = newWord;
 
-                    // Replace the text
-                    selection.Text = newWord;
-
-                    // Remove from positions list
-                    _wordPositions.RemoveAll(w => w.Text == oldWord);
-                }
+                // Remove from positions list
+                _wordPositions.RemoveAll(w => w.Text == oldWord);
             }
             catch (Exception ex)
             {
                 throw new Exception($"Failed to replace word: {ex.Message}", ex);
+            }
+        }
+
+        public void SelectWordInDocument(string wordToSelect)
+        {
+            if (_wordApp == null || _activeDocument == null)
+                return;
+
+            try
+            {
+                // Find and select the word in the document
+                dynamic find = _wordApp.Selection.Find;
+                find.ClearFormatting();
+                find.Text = wordToSelect;
+                find.MatchWholeWord = true;
+                find.MatchCase = false;
+                find.Forward = true;
+                
+                // Execute the find
+                find.Execute();
+            }
+            catch
+            {
+                // Ignore errors - word might not be found
             }
         }
 

@@ -17,11 +17,11 @@ namespace WordHighlighter
 
             // Calculate proper width based on word length
             double calculatedWidth = Math.Max(width, wordText.Length * 8.5);
-            double calculatedHeight = Math.Max(height, 18);
+            double calculatedHeight = Math.Max(height - 4, 14); // Reduce height by 4px
 
             // Position the overlay (adjust top to align better)
             this.Left = left;
-            this.Top = top + 2; // Shift down slightly for better alignment
+            this.Top = top + 4; // Shift down 2px more to center vertically
             this.Width = calculatedWidth;
             this.Height = calculatedHeight;
         }
@@ -29,9 +29,9 @@ namespace WordHighlighter
         public void UpdatePosition(double left, double top, double width, double height)
         {
             this.Left = left;
-            this.Top = top + 2;
+            this.Top = top + 4;
             this.Width = Math.Max(width, WordText.Length * 8.5);
-            this.Height = Math.Max(height, 18);
+            this.Height = Math.Max(height - 4, 14);
         }
 
         private void OverlayBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -13,10 +13,12 @@ namespace WordHighlighter
         private WordInteropService? _wordService;
         private DispatcherTimer? _clickDetectionTimer;
         private DispatcherTimer? _scrollDetectionTimer;
+        private DispatcherTimer? _windowFocusTimer;
         private WordReplacementWidget? _currentWidget = null;
         private string _lastSelectedWord = string.Empty;
         private System.Collections.Generic.List<OverlayBox> _overlayBoxes = new();
         private int _lastScrollPosition = 0;
+        private bool _wordWindowWasFocused = true;
 
         public MainWindow()
         {
@@ -126,6 +128,9 @@ namespace WordHighlighter
                 // Start scroll detection
                 StartScrollDetection();
 
+                // Start window focus detection
+                StartWindowFocusDetection();
+
                 MessageBox.Show($"Added overlay boxes to {wordCount:N0} words in the document.\n\nClick on any highlighted word in Word to replace it.",
                     "Highlighting Complete", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -149,6 +154,7 @@ namespace WordHighlighter
 
                 // Stop scroll detection
                 _scrollDetectionTimer?.Stop();
+                _windowFocusTimer?.Stop();
 
                 // Close all overlay boxes
                 foreach (var box in _overlayBoxes)
@@ -190,6 +196,42 @@ namespace WordHighlighter
             };
             _scrollDetectionTimer.Tick += CheckForScroll;
             _scrollDetectionTimer.Start();
+        }
+
+        private void StartWindowFocusDetection()
+        {
+            _windowFocusTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(200)
+            };
+            _windowFocusTimer.Tick += CheckWordWindowFocus;
+            _windowFocusTimer.Start();
+        }
+
+        private void CheckWordWindowFocus(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (_wordService == null) return;
+
+                bool isWordFocused = _wordService.IsWordWindowFocused();
+
+                // Only update if focus state changed
+                if (isWordFocused != _wordWindowWasFocused)
+                {
+                    _wordWindowWasFocused = isWordFocused;
+
+                    // Show or hide all overlay boxes
+                    foreach (var box in _overlayBoxes)
+                    {
+                        box.Visibility = isWordFocused ? Visibility.Visible : Visibility.Hidden;
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore errors
+            }
         }
 
         private void CheckForScroll(object? sender, EventArgs e)
@@ -329,6 +371,7 @@ namespace WordHighlighter
 
             _clickDetectionTimer?.Stop();
             _scrollDetectionTimer?.Stop();
+            _windowFocusTimer?.Stop();
 
             // Close any open widget
             if (_currentWidget != null)

@@ -28,11 +28,8 @@ namespace WordHighlighter
             txtReplacement.Focus();
             txtReplacement.SelectAll();
 
-            // Close on click outside or deactivate
-            this.Deactivated += (s, e) =>
-            {
-                Close();
-            };
+            // Select the word in the document when widget opens
+            _wordService.SelectWordInDocument(originalWord);
         }
 
         private void BtnReplace_Click(object sender, RoutedEventArgs e)
