@@ -329,7 +329,7 @@ namespace WordHighlighter
             try
             {
                 dynamic selection = _wordApp.Selection;
-                
+
                 // Get the currently selected text
                 string oldWord = selection.Text.ToString().Trim();
 
@@ -359,7 +359,7 @@ namespace WordHighlighter
                 find.MatchWholeWord = true;
                 find.MatchCase = false;
                 find.Forward = true;
-                
+
                 // Execute the find
                 find.Execute();
             }

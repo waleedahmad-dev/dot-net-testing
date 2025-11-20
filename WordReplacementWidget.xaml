@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Replace Word"
-        Height="340"
-        Width="400"
+        Height="290"
+        Width="360"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="Manual"
@@ -31,7 +31,7 @@
             <Setter Property="FontWeight"
                     Value="SemiBold"/>
             <Setter Property="FontSize"
-                    Value="14"/>
+                    Value="13"/>
             <Setter Property="Cursor"
                     Value="Hand"/>
             <Setter Property="Template">
@@ -68,7 +68,7 @@
             <Setter Property="FontWeight"
                     Value="SemiBold"/>
             <Setter Property="FontSize"
-                    Value="14"/>
+                    Value="13"/>
             <Setter Property="Cursor"
                     Value="Hand"/>
             <Setter Property="Template">
@@ -103,11 +103,11 @@
             <Setter Property="BorderBrush"
                     Value="#E5E7EB"/>
             <Setter Property="Padding"
-                    Value="10,5"/>
+                    Value="8,4"/>
             <Setter Property="FontWeight"
                     Value="Medium"/>
             <Setter Property="FontSize"
-                    Value="12"/>
+                    Value="11"/>
             <Setter Property="Cursor"
                     Value="Hand"/>
             <Setter Property="Template">
@@ -147,7 +147,7 @@
                               ShadowDepth="0"/>
         </Border.Effect>
 
-        <Grid Margin="20">
+        <Grid Margin="16">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -159,14 +159,14 @@
 
             <!-- Header with Close Button -->
             <Grid Grid.Row="0"
-                  Margin="0,0,0,12">
+                  Margin="0,0,0,8">
                 <StackPanel>
                     <TextBlock Text="Replace Word"
-                               FontSize="16"
+                               FontSize="14"
                                FontWeight="Bold"
                                Foreground="#111827"/>
                     <TextBlock Text="Make your changes and transform with ease"
-                               FontSize="11"
+                               FontSize="10"
                                Foreground="#6B7280"
                                Margin="0,2,0,0"/>
                 </StackPanel>
@@ -183,19 +183,19 @@
 
             <!-- Original Word -->
             <StackPanel Grid.Row="1"
-                        Margin="0,0,0,10">
+                        Margin="0,0,0,8">
                 <TextBlock Text="ORIGINAL"
                            FontWeight="SemiBold"
-                           FontSize="12"
+                           FontSize="10"
                            Foreground="#6B7280"
-                           Margin="0,0,0,6"/>
+                           Margin="0,0,0,4"/>
                 <Border Background="#F9FAFB"
-                        Padding="14"
-                        CornerRadius="8"
+                        Padding="10"
+                        CornerRadius="6"
                         BorderThickness="1"
                         BorderBrush="#E5E7EB">
                     <TextBlock x:Name="txtOriginalWord"
-                               FontSize="15"
+                               FontSize="13"
                                FontWeight="Medium"
                                Foreground="#111827"/>
                 </Border>
@@ -203,19 +203,19 @@
 
             <!-- Replacement Input -->
             <StackPanel Grid.Row="2"
-                        Margin="0,0,0,10">
+                        Margin="0,0,0,8">
                 <TextBlock Text="REPLACEMENT"
                            FontWeight="SemiBold"
-                           FontSize="12"
+                           FontSize="10"
                            Foreground="#6B7280"
-                           Margin="0,0,0,6"/>
+                           Margin="0,0,0,4"/>
                 <Border BorderBrush="#D1D5DB"
-                        BorderThickness="2"
-                        CornerRadius="8">
+                        BorderThickness="1.5"
+                        CornerRadius="6">
                     <TextBox x:Name="txtReplacement"
-                             Height="36"
-                             FontSize="15"
-                             Padding="14,0"
+                             Height="32"
+                             FontSize="13"
+                             Padding="10,0"
                              VerticalContentAlignment="Center"
                              BorderThickness="0"
                              Background="White"
@@ -238,12 +238,12 @@
 
             <!-- Quick Transformations -->
             <StackPanel Grid.Row="3"
-                        Margin="0,0,0,12">
+                        Margin="0,0,0,8">
                 <TextBlock Text="QUICK TRANSFORMATIONS"
                            FontWeight="SemiBold"
-                           FontSize="12"
+                           FontSize="10"
                            Foreground="#6B7280"
-                           Margin="0,0,0,8"/>
+                           Margin="0,0,0,6"/>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left">
                     <Button Content="🔤 UPPERCASE"
@@ -275,13 +275,13 @@
                         Content="Cancel"
                         Click="BtnCancel_Click"
                         Style="{StaticResource SecondaryButton}"
-                        Height="36"/>
+                        Height="32"/>
                 <Button Grid.Column="2"
                         x:Name="btnReplace"
                         Content="Replace Word"
                         Click="BtnReplace_Click"
                         Style="{StaticResource ModernButton}"
-                        Height="36"/>
+                        Height="32"/>
             </Grid>
         </Grid>
     </Border>

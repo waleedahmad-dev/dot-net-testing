@@ -27,7 +27,6 @@ bld/
 [Ll]og/
 
 # Visual Studio cache/options
-.vscode/
 *.code-workspace
 
 # NuGet Packages
